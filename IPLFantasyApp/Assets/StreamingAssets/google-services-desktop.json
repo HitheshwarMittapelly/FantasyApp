@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "638448734930",
+    "firebase_url": "https://fantasyapp-7e292.firebaseio.com",
+    "project_id": "fantasyapp-7e292",
+    "storage_bucket": "fantasyapp-7e292.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:638448734930:android:0d477cd5d5d5a99e",
+        "android_client_info": {
+          "package_name": "com.Hitesh.FantasyApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "638448734930-2eh2bpsn6umm715uadvkiht2em8fiuc9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBf8faH7F12U47GyMRwHyxxtfeIF8xXO-0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

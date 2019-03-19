@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace FantasyApp {
 	public enum ScreenType {
 		OpeningScreen,
@@ -71,7 +72,7 @@ namespace FantasyApp {
 		}
 
 		public void HideAllScreens() {
-			currentTeamButton.SetActive(false);
+			//currentTeamButton.SetActive(false);
 			foreach (var handler in screenHandlers) {
 				handler.Hide();
 			}
