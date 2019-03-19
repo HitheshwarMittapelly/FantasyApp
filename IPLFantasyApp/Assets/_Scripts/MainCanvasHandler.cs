@@ -27,7 +27,7 @@ namespace FantasyApp {
 		public List<ScreenHandler> screenHandlers;
 
 		public GameObject currentTeamButton;
-		
+
 		public List<PlayerInfo> currentTeam;
 
 		private ScreenType CurrentScreen;
@@ -38,7 +38,7 @@ namespace FantasyApp {
 		}
 
 		public void Awake() {
-			foreach(var handler in screenHandlers) {
+			foreach (var handler in screenHandlers) {
 				handler.Initialize(this);
 			}
 			GotoOpeningScreen();
@@ -56,7 +56,7 @@ namespace FantasyApp {
 
 		public bool GoToScreen(ScreenType targetScreen) {
 			int prevScreenIndex = (int)CurrentScreen;
-
+			lastScreenIndex = (int)CurrentScreen;
 			//Once we have a reference to the current game object we update the current screen to be our target screen
 			int currentScreenIndex = (int)targetScreen;
 
@@ -75,6 +75,9 @@ namespace FantasyApp {
 			foreach (var handler in screenHandlers) {
 				handler.Hide();
 			}
+		}
+		public void GotoLastScreen() {
+			GoToScreen((ScreenType)lastScreenIndex);
 		}
 		public void GotoOpeningScreen() {
 			GoToScreen(ScreenType.OpeningScreen);
