@@ -18,27 +18,51 @@ namespace FantasyApp {
 
 		public override void OnShow() {
 			base.OnShow();
+			DestroyAllButtons(scrollContent.transform);
 			LoadCurrentTeam();
 		}
 
+		private void DestroyAllButtons(Transform target) {
+			for (int i = 0; i < target.childCount; i++) {
+				GameObject.Destroy(target.GetChild(i).gameObject);
+			}
+		}
 		// Update is called once per frame
 		void Update() {
 
 		}
 
-		public void GenerateScrollItem(string name, string price, string type) {
+		public void GenerateScrollItem(PlayerInfo player) {
 			GameObject obj = Instantiate(scrollItem);
 			obj.transform.SetParent(scrollContent.transform, false);
-			obj.transform.Find("PlayerName").gameObject.GetComponent<Text>().text = name;
-			obj.transform.Find("PlayerPrice").gameObject.GetComponent<Text>().text = price;
-			
+			obj.transform.Find("PlayerName").gameObject.GetComponent<Text>().text = player.playerName;
+			obj.transform.Find("PlayerPrice").gameObject.GetComponent<Text>().text = player.price;
+			obj.GetComponentInChildren<Button>().onClick.AddListener(() => {
+				parentMenu.RemoveFromCurrentTeam(player);
+			});
 
 		}
 
 		public void LoadCurrentTeam() {
 			foreach(var player in parentMenu.currentTeam) {
-				GenerateScrollItem(player.playerName, player.price, player.playerType);
+				GenerateScrollItem(player);
 			}
+		}
+
+		public void ClearButtonClick() {
+			parentMenu.ClearAllPlayersFromCurrentTeam();
+			DestroyAllButtons(scrollContent.transform);
+			LoadCurrentTeam();
+		}
+		public void SaveButtonClick() {
+			parentMenu.OverWriteCurrentSaveTeam();
+			
+		}
+
+		public void DiscardButtonClick() {
+			parentMenu.DiscardAllPlayers();
+			DestroyAllButtons(scrollContent.transform);
+			LoadCurrentTeam();
 		}
 	}
 }

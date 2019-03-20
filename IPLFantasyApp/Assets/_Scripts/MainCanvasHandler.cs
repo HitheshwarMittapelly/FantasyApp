@@ -31,6 +31,7 @@ namespace FantasyApp {
 
 		public List<PlayerInfo> currentTeam;
 
+		public List<PlayerInfo> savedInDBTeam;
 		private ScreenType CurrentScreen;
 		private int lastScreenIndex;
 		public static MainCanvasHandler GetObject() {
@@ -58,13 +59,12 @@ namespace FantasyApp {
 		public bool GoToScreen(ScreenType targetScreen) {
 			int prevScreenIndex = (int)CurrentScreen;
 			lastScreenIndex = (int)CurrentScreen;
-			//Once we have a reference to the current game object we update the current screen to be our target screen
+			
 			int currentScreenIndex = (int)targetScreen;
 
 			HideAllScreens();
 			screenHandlers[currentScreenIndex].ShowFromLeft();
 
-			//GameObject screenToTransitionTo = Instance.screens[currentScreenIndex];
 
 			CurrentScreen = (ScreenType)currentScreenIndex;
 
@@ -72,7 +72,7 @@ namespace FantasyApp {
 		}
 
 		public void HideAllScreens() {
-			//currentTeamButton.SetActive(false);
+			currentTeamButton.SetActive(false);
 			foreach (var handler in screenHandlers) {
 				handler.Hide();
 			}
@@ -125,11 +125,60 @@ namespace FantasyApp {
 		}
 
 		public void AddToCurrentTeam(PlayerInfo newPlayer) {
-			currentTeam.Add(newPlayer);
+			if (currentTeam.Count < 11 && !currentTeam.Contains(newPlayer)) {
+				currentTeam.Add(newPlayer);
+			}
 		}
 		
 		public void RemoveFromCurrentTeam(PlayerInfo player) {
 			currentTeam.Remove(player);
 		}
+
+		public void OverWriteCurrentSaveTeam() {
+			bool result = CheckIfPlayerTypeRulesFollowed();
+			if (result) {
+				Debug.Log("trying to update");
+				FirebaseTools.UpdateTeam(currentTeam);
+			}
+			else {
+				Debug.Log("Result is false");
+			}
+		}
+
+		public void DiscardAllPlayers() {
+			currentTeam.Clear();
+		}
+
+		public void ClearAllPlayersFromCurrentTeam() {
+			currentTeam.Clear();
+		}
+
+		private bool CheckIfPlayerTypeRulesFollowed() {
+			int bat = 0, bwl = 0, wk = 0;
+			if (currentTeam.Count != 11) {
+				return false;
+			}
+			const string batsmen = "BAT";
+			const string bowler = "BWL";
+			const string wicketKeeper = "WK";
+			foreach(var player in currentTeam) {
+				switch (player.playerType.ToUpper()) {
+					case batsmen: bat++;
+						break;
+					case bowler: bwl++;
+						break;
+					case wicketKeeper: wk++;
+						break;
+				}
+
+			}
+			if (bat >= 2 && bwl > 2 && wk > 0) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
 	}
 }

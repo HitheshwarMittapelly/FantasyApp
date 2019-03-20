@@ -14,6 +14,8 @@ namespace FantasyApp {
 		public InputField confirmPass;
 		public GameObject signinUpWindow;
 
+		private string userName;
+		private bool checkForRegisterComplete;
 		const string MatchEmailPattern =
 			@"^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@"
 			+ @"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\."
@@ -27,6 +29,8 @@ namespace FantasyApp {
 
 		public override void OnShow() {
 			base.OnShow();
+			ClearInputFields();
+			userName = null;
 			signinUpWindow.SetActive(false);
 		}
 		// Use this for initialization
@@ -36,7 +40,10 @@ namespace FantasyApp {
 	
 		// Update is called once per frame
 		void Update () {
-		
+			if (FirebaseTools.registerComplete && checkForRegisterComplete) {
+				checkForRegisterComplete = false;
+				UnityMainThreadDispatcher.Instance().Enqueue(CheckIfCanChangeScreen());
+			}
 		}
 
 		public void OnRegisterButtonClick() {
@@ -69,14 +76,20 @@ namespace FantasyApp {
 			}
 			
 			message = "Registered";
+			userName = displayName.text;
+			UnityMainThreadDispatcher.Instance().Enqueue(ShowSigningUp());
 			FirebaseTools.Register(email.text,password.text,RegisterCallback);
+			checkForRegisterComplete = true;
 			Debug.Log(message);
 			
 			
 
 		}
 
-		private void ShowSigningUp() {
+		private IEnumerator ShowSigningUp() {
+			if (FirebaseTools.registerComplete) {
+				yield return null;
+			}
 			ClearInputFields();
 			signinUpWindow.SetActive(true);
 		}
@@ -90,13 +103,22 @@ namespace FantasyApp {
 		private void RegisterCallback(AggregateException exception) {
 			if(exception == null) {
 				Debug.Log("Register success");
-				parentMenu.GotoLoginScreen();
+				
 			}
 			else {
 				string str = exception.ToString().Split(new string[] { "Firebase.FirebaseException: " }, StringSplitOptions.RemoveEmptyEntries)[1].Trim();
 				Debug.Log(str);
 			}
 
+		}
+
+		private IEnumerator CheckIfCanChangeScreen() {
+			if (!FirebaseTools.registerComplete) {
+				yield return null;
+			}
+			parentMenu.GotoLoginScreen();
+			FirebaseTools.UpdateDisplayName(userName, (result) => { });
+			FirebaseTools.WriteDisplayName(userName);
 		}
 		private bool CheckIfValidEmail(string email) {
 			if (email != null) {
