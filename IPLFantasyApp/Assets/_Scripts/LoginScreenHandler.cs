@@ -9,9 +9,12 @@ namespace FantasyApp {
 		
 		public InputField passwordField;
 		public GameObject loggingInWindow;
-
+		public Button backButton;
+		
 		private string message;
 		private bool checkForLoginComplete;
+		private bool loginFailed;
+		private string loginFailReason;
 		public override void Initialize(MainCanvasHandler parentMenu) {
 			base.Initialize(parentMenu);
 			this.HandlerType = ScreenType.OpeningScreen;
@@ -21,6 +24,7 @@ namespace FantasyApp {
 			ClearInputFields();
 			message = null;
 			loggingInWindow.SetActive(false);
+			loggingInWindow.transform.SetAsLastSibling();
 
 		}
 
@@ -33,6 +37,11 @@ namespace FantasyApp {
 		void Update () {
 			if(FirebaseTools.loginComplete && checkForLoginComplete) {
 				checkForLoginComplete = false;
+				if (loginFailed) {
+					loggingInWindow.GetComponentInChildren<Text>().text = loginFailReason;
+					backButton.transform.SetAsLastSibling();
+					return;
+				}
 				UnityMainThreadDispatcher.Instance().Enqueue(CheckIfCanChangeScreen());
 			}
 		}
@@ -68,8 +77,10 @@ namespace FantasyApp {
 				message = "login failed";
 				string str = exception.ToString().Split(new string[] { "Firebase.FirebaseException: " }, StringSplitOptions.RemoveEmptyEntries)[1].Trim();
 				Debug.Log(str);
-				loggingInWindow.GetComponentInChildren<Text>().text = str;
-				
+				FirebaseTools.loginComplete = true;
+				loginFailed = true;
+				var stringsObj = str.Split('.');
+				loginFailReason = stringsObj[0] + stringsObj[1];
 			}
 		}
 		private IEnumerator ShowLoggingIn() {
@@ -82,6 +93,7 @@ namespace FantasyApp {
 			
 				yield return null;
 			}
+			
 			FirebaseTools.GetSubsLeft(result => { });
 			parentMenu.GotoHomeScreen();
 		}

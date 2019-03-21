@@ -44,12 +44,15 @@ namespace FantasyApp {
 		public int numOfAllRounders;
 		[HideInInspector]
 		public int numOfWicketKeepers;
+		[HideInInspector]
+		public int currentBudget;
 		
 		private ScreenType CurrentScreen;
 		private int lastScreenIndex;
 		private bool checkForTeamUpdate;
 		private bool checkForSquadUpdate;
-
+		private int gameBudget = 1000;
+		
 		public static MainCanvasHandler GetObject() {
 			MainCanvasHandler theObjectInQuestion = FindObjectOfType<MainCanvasHandler>() as MainCanvasHandler;
 			return theObjectInQuestion;
@@ -192,19 +195,57 @@ namespace FantasyApp {
 			
 		}
 
-		public void ReplacePlayerWith( PlayerInfo newPlayer) {
+		public string ReplacePlayerWith( PlayerInfo newPlayer) {
+			string message;
 			PlayerInfo oldPlayer = screenHandlers[5].GetComponent<CurrentTeamScreenHandler>().selectedPlayer;
 			if ( oldPlayer.playerName != "dummy") {
 				RemoveFromCurrentTeam(oldPlayer);
-				AddToCurrentTeam(newPlayer);
+				message = AddToTeamWithReturnValue(newPlayer);
+				if(message.ToLower()!= "budget exceeded 1000k") {
+					message = "success";
+				}
+				screenHandlers[5].GetComponent<CurrentTeamScreenHandler>().selectedPlayer.playerName = "dummy";
 			}
 			else {
-				AddToCurrentTeam(newPlayer);
+				message = AddToTeamWithReturnValue(newPlayer);
+				
 			}
-			
+			return message;
 		}
 		public void AddToCurrentTeam(PlayerInfo newPlayer) {
+			if ((currentBudget + System.Int32.Parse(newPlayer.price.ToLower().Replace("k", string.Empty)) > gameBudget)) {
+				return;
+			}
 			
+			if (currentTeam.Count < 11 && !currentTeam.Contains(newPlayer)) {
+				if (newPlayer.playerType.ToUpper() == "BAT") {
+					numOfBatsmen++;
+				}
+				else if (newPlayer.playerType.ToUpper() == "BWL") {
+					numOfBowlers++;
+				}
+				else if (newPlayer.playerType.ToUpper() == "ALL") {
+					numOfAllRounders++;
+				}
+				else if (newPlayer.playerType.ToUpper() == "WK") {
+					numOfWicketKeepers++;
+				}
+				currentBudget += System.Int32.Parse(newPlayer.price.ToLower().Replace("k", string.Empty));
+				currentTeam.Add(newPlayer);
+				
+			}
+			
+			
+		}
+		public string AddToTeamWithReturnValue(PlayerInfo newPlayer) {
+			if((currentBudget + System.Int32.Parse(newPlayer.price.ToLower().Replace("k", string.Empty)) > gameBudget) ){
+				return "Budget exceeded 1000k";
+			}
+			string message;
+			message = "success";
+			if (currentTeam.Count >= 11) {
+				message = "Players exceeding 11";
+			}
 			if (currentTeam.Count < 11 && !currentTeam.Contains(newPlayer)) {
 				if(newPlayer.playerType.ToUpper() == "BAT") {
 					numOfBatsmen++;
@@ -218,9 +259,13 @@ namespace FantasyApp {
 				else if (newPlayer.playerType.ToUpper() == "WK") {
 					numOfWicketKeepers++;
 				}
-
+				currentBudget += System.Int32.Parse(newPlayer.price.ToLower().Replace("k", string.Empty));
 				currentTeam.Add(newPlayer);
+				message = "success";
 			}
+			
+			 
+			return message;
 		}
 		
 		public void RemoveFromCurrentTeam(PlayerInfo player) {
@@ -236,6 +281,7 @@ namespace FantasyApp {
 			else if (player.playerType.ToUpper() == "WK") {
 				numOfWicketKeepers--;
 			}
+			currentBudget -= System.Int32.Parse(player.price.ToLower().Replace("k", string.Empty));
 			currentTeam.Remove(player);
 		}
 
@@ -274,6 +320,7 @@ namespace FantasyApp {
 		}
 		public void DiscardAllPlayers() {
 			currentTeam.Clear();
+			currentBudget = 0;
 			numOfAllRounders = 0;
 			numOfBatsmen = 0;
 			numOfBowlers = 0;
@@ -283,6 +330,7 @@ namespace FantasyApp {
 
 		public void ClearAllPlayersFromCurrentTeam() {
 			currentTeam.Clear();
+			currentBudget = 0;
 			numOfAllRounders = 0;
 			numOfBatsmen = 0;
 			numOfBowlers = 0;

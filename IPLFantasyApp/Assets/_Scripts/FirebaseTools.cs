@@ -114,6 +114,9 @@ public static class FirebaseTools  {
 	}
 
 	public static string GetCurrentUserDisplayName() {
+		if (!EnsureSignedIn()) {
+			return null;
+		}
 		return Auth.CurrentUser.DisplayName;
 	}
 

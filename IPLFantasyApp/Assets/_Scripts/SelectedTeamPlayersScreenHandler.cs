@@ -11,7 +11,7 @@ namespace FantasyApp {
 		public GameObject scrollContent;
 		public GameObject scrollItem;
 		public string currentTeam;
-
+		public GameObject errorPanel;
 		public CurrentTeamScreenHandler currentTeamScreenHandler;
 		private int num = 0;
 		// Use this for initialization
@@ -21,10 +21,12 @@ namespace FantasyApp {
 		public override void Initialize(MainCanvasHandler parentMenu) {
 			base.Initialize(parentMenu);
 			this.HandlerType = ScreenType.SelectedTeamPlayersScreen;
+
 		}
 
 		public override void OnShow() {
 			base.OnShow();
+			errorPanel.SetActive(false);
 			DestroyAllButtons(scrollContent.transform);
 			LoadPlayersFromFile(currentTeam);
 		}
@@ -53,7 +55,12 @@ namespace FantasyApp {
 		}
 
 		public void ReplacePlayer(PlayerInfo player) {
-			parentMenu.ReplacePlayerWith(player);
+			string message = parentMenu.ReplacePlayerWith(player);
+			if (message.ToLower() != "success") {
+				errorPanel.gameObject.SetActive(true);
+				errorPanel.GetComponentInChildren<Text>().text = message;
+				return;
+			}
 			DestroyAllButtons(scrollContent.transform);
 			LoadPlayersFromFile(currentTeam);
 		}

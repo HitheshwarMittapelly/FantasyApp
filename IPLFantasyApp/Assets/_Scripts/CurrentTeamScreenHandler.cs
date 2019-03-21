@@ -15,6 +15,7 @@ namespace FantasyApp {
 		public Text allRounderCountText;
 		public Text wicketKeeperCountText;
 		public Text subsLeftText;
+		public Text budgetText;
 		public PlayerInfo selectedPlayer;
 
 		
@@ -28,6 +29,7 @@ namespace FantasyApp {
 			selectedPlayer.playerName = "dummy";
 			DestroyAllButtons(scrollContent.transform);
 			CalculateSubs();
+			
 			LoadCurrentTeam();
 		}
 
@@ -66,6 +68,7 @@ namespace FantasyApp {
 			foreach (var player in parentMenu.currentTeam) {
 				GenerateScrollItem(player);
 			}
+			budgetText.text = "Budget Used : " + parentMenu.currentBudget + "k";
 		}
 		private void CalculateSubs() {
 			int noChanges = 0;
