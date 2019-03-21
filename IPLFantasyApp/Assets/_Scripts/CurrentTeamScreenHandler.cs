@@ -10,7 +10,14 @@ namespace FantasyApp {
 		public ScrollRect scrollRect;
 		public GameObject scrollContent;
 		public GameObject scrollItem;
+		public Text batsmenCountText;
+		public Text bowlerCountText;
+		public Text allRounderCountText;
+		public Text wicketKeeperCountText;
+		public Text subsLeftText;
+		public PlayerInfo selectedPlayer;
 
+		
 		public override void Initialize(MainCanvasHandler parentMenu) {
 			base.Initialize(parentMenu);
 			this.HandlerType = ScreenType.SelectedTeamPlayersScreen;
@@ -18,7 +25,9 @@ namespace FantasyApp {
 
 		public override void OnShow() {
 			base.OnShow();
+			selectedPlayer.playerName = "dummy";
 			DestroyAllButtons(scrollContent.transform);
+			CalculateSubs();
 			LoadCurrentTeam();
 		}
 
@@ -38,23 +47,47 @@ namespace FantasyApp {
 			obj.transform.Find("PlayerName").gameObject.GetComponent<Text>().text = player.playerName;
 			obj.transform.Find("PlayerPrice").gameObject.GetComponent<Text>().text = player.price;
 			obj.GetComponentInChildren<Button>().onClick.AddListener(() => {
-				parentMenu.RemoveFromCurrentTeam(player);
+				RemoveFromList(player);
 			});
 
 		}
 
+		public void RemoveFromList(PlayerInfo player) {
+			selectedPlayer = player;
+			//parentMenu.RemoveFromCurrentTeam(player);
+			parentMenu.GotoTeamSelectionScreen();
+		}
 		public void LoadCurrentTeam() {
-			foreach(var player in parentMenu.currentTeam) {
+			
+			batsmenCountText.text = "BAT : " + parentMenu.numOfBatsmen;
+			bowlerCountText.text = "BWL : " + parentMenu.numOfBowlers;
+			allRounderCountText.text = "ALL : " + parentMenu.numOfAllRounders;
+			wicketKeeperCountText.text = "WK : " + parentMenu.numOfWicketKeepers;
+			foreach (var player in parentMenu.currentTeam) {
 				GenerateScrollItem(player);
 			}
 		}
-
+		private void CalculateSubs() {
+			int noChanges = 0;
+			foreach(var playerPID in FirebaseTools.serverTeam) {
+				foreach(var player in parentMenu.currentTeam) {
+					if(playerPID == player.pid) {
+						noChanges++;
+					}
+				}
+			}
+			int changes = FirebaseTools.subsLeft - (11 - noChanges);
+			
+			subsLeftText.text = "Subs left : " + changes;
+		}
 		public void ClearButtonClick() {
 			parentMenu.ClearAllPlayersFromCurrentTeam();
 			DestroyAllButtons(scrollContent.transform);
 			LoadCurrentTeam();
+			CalculateSubs();
 		}
 		public void SaveButtonClick() {
+
 			parentMenu.OverWriteCurrentSaveTeam();
 			
 		}
@@ -63,6 +96,7 @@ namespace FantasyApp {
 			parentMenu.DiscardAllPlayers();
 			DestroyAllButtons(scrollContent.transform);
 			LoadCurrentTeam();
+			CalculateSubs();
 		}
 	}
 }

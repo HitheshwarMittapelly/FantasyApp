@@ -35,7 +35,9 @@ namespace FantasyApp {
 				yield return null;
 			}
 			Debug.Log(FirebaseTools.GetCurrentUserDisplayName());
+
 			infoText.text = string.Format("Welcome {0}",FirebaseTools.GetCurrentUserDisplayName());
+			parentMenu.UpdateTeamIfFoundOnServer();
 			loadingWindow.SetActive(false);
 		}
 	}

@@ -2,7 +2,7 @@
 using System.Collections;
 
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -48,7 +48,7 @@ namespace FantasyApp {
 
 		public void OnRegisterButtonClick() {
 			string message;
-			bool isValid = CheckIfValidEmail(email.text);
+			bool isValid = FirebaseTools.CheckIfValidEmail(email.text);
 			if (!isValid) {
 				message = "Badly formatted email";
 				Debug.Log(message);
@@ -119,15 +119,9 @@ namespace FantasyApp {
 			parentMenu.GotoLoginScreen();
 			FirebaseTools.UpdateDisplayName(userName, (result) => { });
 			FirebaseTools.WriteDisplayName(userName);
+			FirebaseTools.WriteSubstitutes(80);
 		}
-		private bool CheckIfValidEmail(string email) {
-			if (email != null) {
-				return Regex.IsMatch(email, MatchEmailPattern);
-			}
-			else {
-				return false;
-			}
-		}
+		
 	}
 }
 

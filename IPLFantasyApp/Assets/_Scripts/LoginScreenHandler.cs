@@ -10,6 +10,7 @@ namespace FantasyApp {
 		public InputField passwordField;
 		public GameObject loggingInWindow;
 
+		private string message;
 		private bool checkForLoginComplete;
 		public override void Initialize(MainCanvasHandler parentMenu) {
 			base.Initialize(parentMenu);
@@ -18,6 +19,7 @@ namespace FantasyApp {
 		public override void OnShow() {
 			base.OnShow();
 			ClearInputFields();
+			message = null;
 			loggingInWindow.SetActive(false);
 
 		}
@@ -37,11 +39,22 @@ namespace FantasyApp {
 
 		public void OnLoginButtonClick() {
 			string email = emailField.text;
+			if (string.IsNullOrEmpty(email)) {
+				email = "test@test.com";
+			}
+			
 			string password = passwordField.text;
-
+			//bool isValid = FirebaseTools.CheckIfValidEmail(email);
+			if (string.IsNullOrEmpty(password)) {
+				password = "password";
+			}
+			//if (!isValid) {
+			//	return;
+			//}
 			UnityMainThreadDispatcher.Instance().Enqueue(ShowLoggingIn());
 
 			FirebaseTools.LogIn(email, password, LoginCallback);
+			
 			checkForLoginComplete = true;
 			ClearInputFields();
 		}
@@ -49,11 +62,14 @@ namespace FantasyApp {
 		private void LoginCallback(AggregateException exception) {
 			if(exception == null) {
 				Debug.Log("Login Success");
-				
+				message = "success";
 			}
 			else {
+				message = "login failed";
 				string str = exception.ToString().Split(new string[] { "Firebase.FirebaseException: " }, StringSplitOptions.RemoveEmptyEntries)[1].Trim();
 				Debug.Log(str);
+				loggingInWindow.GetComponentInChildren<Text>().text = str;
+				
 			}
 		}
 		private IEnumerator ShowLoggingIn() {
@@ -62,10 +78,11 @@ namespace FantasyApp {
 			loggingInWindow.SetActive(true);
 		}
 		private IEnumerator CheckIfCanChangeScreen() {
-			if (!FirebaseTools.registerComplete) {
+			if (!FirebaseTools.loginComplete) {
 			
 				yield return null;
 			}
+			FirebaseTools.GetSubsLeft(result => { });
 			parentMenu.GotoHomeScreen();
 		}
 		
