@@ -32,6 +32,7 @@ public static class FirebaseTools  {
 	private static string SUBS_PATH = "users/{0}/subs";
 	private static string TEAM_PATH = "users/{0}/team";
 	private static string SQUAD_PATH = "Squads/{0}";
+	private static string DASHBOARD_PATH = "Dashboard/";
 	public static bool registerComplete;
 	
 	public static int subsLeft;
@@ -48,6 +49,7 @@ public static class FirebaseTools  {
 	public static List<PlayerInfo> batTeam;
 	public static List<PlayerInfo> wkTeam;
 	public static List<PlayerInfo> bwlTeam;
+	public static List<DashBoardEntry> dashboardEntries;
 	public static bool teamUpdateComplete;
 	public static bool loginComplete;
 	public static bool squadUpdateComplete;
@@ -195,8 +197,15 @@ public static class FirebaseTools  {
 		string path = string.Format(TEAM_PATH, Auth.CurrentUser.UserId);
 		var databaseReference = DB.Child(path);
 		int index = 0;
+		if (serverTeam != null) {
+			serverTeam.Clear();
+		}
 		foreach (var p in team) {
 			string obj = p.pid ;
+			if (serverTeam != null) {
+				serverTeam.Add(obj);
+			}
+			
 			databaseReference.Child(index.ToString()).SetValueAsync((obj));
 			index++;
 		}
@@ -332,6 +341,42 @@ public static class FirebaseTools  {
 						squadUpdateComplete = true;
 					}
 
+				}
+				else {
+					callback(null);
+				}
+			}
+		});
+	}
+	public static void GetDashBoardFromDB( Action<AggregateException> callback) {
+		//if (!EnsureSignedIn()) {
+		//	return ;
+		//}
+
+		
+		string path = DASHBOARD_PATH;
+		var databaseReference = DB.Child(path);
+		databaseReference.GetValueAsync().ContinueWith((task) => {
+			if (task.IsFaulted) {
+				Debug.LogError("Getting Data From Squads Failed Due To: " + task.Exception);
+			}
+
+			if (task.IsCompleted) {
+				if (task.Result.Exists) {
+					DataSnapshot dataSnapshot = task.Result;
+					dashboardEntries = new List<DashBoardEntry>();
+					dashboardEntries.Clear();
+					foreach (var child in dataSnapshot.Children) {
+						Debug.Log(child.Child("name").Value + "--" + child.Child("points").Value);
+						DashBoardEntry dbEntry = new DashBoardEntry(child.Child("name").Value.ToString(), System.Int32.Parse(child.Child("points").Value.ToString()));
+						if (EnsureSignedIn()) {
+							if(child.Child("userid").Value.ToString() == Auth.CurrentUser.UserId.ToString()) {
+								dbEntry.UserID = child.Child("userid").Value.ToString();
+							}
+						}
+						dashboardEntries.Add(dbEntry);
+					}
+					
 				}
 				else {
 					callback(null);

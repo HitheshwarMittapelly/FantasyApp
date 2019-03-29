@@ -15,7 +15,7 @@ namespace FantasyApp {
 		
 	}
 
-	public struct PlayerInfo{
+	public class PlayerInfo{
 		public string playerName;
 		public string price;
 		public string playerType;
@@ -25,6 +25,15 @@ namespace FantasyApp {
 			playerName = name;
 			price = pprice;
 			playerType = type;
+		}
+	}
+	public class DashBoardEntry {
+		public string UserName;
+		public int TotalScore;
+		public string UserID = null;
+		public DashBoardEntry(string name, int score) {
+			UserName = name;
+			TotalScore = score;
 		}
 	}
 	public class MainCanvasHandler : MonoBehaviour {
@@ -68,6 +77,7 @@ namespace FantasyApp {
 
 		void Start() {
 			UpdateAllSquads();
+			UpdateDashBoard();
 		}
 
 		// Update is called once per frame
@@ -317,6 +327,9 @@ namespace FantasyApp {
 			FirebaseTools.GetSquadFromDatabase("BAT", result => { });
 			Debug.Log("called Update squads");
 
+		}
+		public void UpdateDashBoard() {
+			FirebaseTools.GetDashBoardFromDB(result=> { });
 		}
 		public void DiscardAllPlayers() {
 			currentTeam.Clear();

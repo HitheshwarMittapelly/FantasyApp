@@ -13,9 +13,11 @@ namespace FantasyApp {
 		public InputField password;
 		public InputField confirmPass;
 		public GameObject signinUpWindow;
-
+		public Button backButton;
 		private string userName;
 		private bool checkForRegisterComplete;
+		private bool signUpFailed;
+		private string signUpFailReason;
 		const string MatchEmailPattern =
 			@"^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@"
 			+ @"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\."
@@ -32,6 +34,8 @@ namespace FantasyApp {
 			ClearInputFields();
 			userName = null;
 			signinUpWindow.SetActive(false);
+
+			signinUpWindow.transform.SetAsLastSibling();
 		}
 		// Use this for initialization
 		void Start () {
@@ -42,6 +46,11 @@ namespace FantasyApp {
 		void Update () {
 			if (FirebaseTools.registerComplete && checkForRegisterComplete) {
 				checkForRegisterComplete = false;
+				if (signUpFailed) {
+					signinUpWindow.GetComponentInChildren<Text>().text = signUpFailReason;
+					backButton.transform.SetAsLastSibling();
+					return;
+				}
 				UnityMainThreadDispatcher.Instance().Enqueue(CheckIfCanChangeScreen());
 			}
 		}
@@ -52,30 +61,36 @@ namespace FantasyApp {
 			if (!isValid) {
 				message = "Badly formatted email";
 				Debug.Log(message);
-				return;
+				//return;
 			}
 			if (string.IsNullOrEmpty(displayName.text)) {
 				message = ("Please enter a valid Name");
 				Debug.Log(message);
-				return;
+				//return;
 			}
 			if (string.IsNullOrEmpty(password.text)) {
 				message = ("Please enter a valid password");
 				Debug.Log(message);
-				return;
+				//return;
 			}
 			if (string.IsNullOrEmpty(confirmPass.text)) {
 				message = "Confirm password field is not valid";
 				Debug.Log(message);
-				return;
+				//return;
 			}
 			if (confirmPass.text != password.text) {
 				message = ("Passwords are not the same");
 				Debug.Log(message);
-				return;
+				//return;
 			}
 			
 			message = "Registered";
+			if(message!= "Registered") {
+				signinUpWindow.SetActive(true);
+				signinUpWindow.GetComponentInChildren<Text>().text = message;
+				//backButton.transform.SetAsLastSibling();
+				return;
+			}
 			userName = displayName.text;
 			UnityMainThreadDispatcher.Instance().Enqueue(ShowSigningUp());
 			FirebaseTools.Register(email.text,password.text,RegisterCallback);
@@ -106,8 +121,13 @@ namespace FantasyApp {
 				
 			}
 			else {
+				
 				string str = exception.ToString().Split(new string[] { "Firebase.FirebaseException: " }, StringSplitOptions.RemoveEmptyEntries)[1].Trim();
 				Debug.Log(str);
+				FirebaseTools.registerComplete = true;
+				signUpFailed = true;
+				var stringsObj = str.Split('.');
+				signUpFailReason = stringsObj[0] + stringsObj[1];
 			}
 
 		}

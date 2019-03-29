@@ -16,7 +16,7 @@ namespace FantasyApp {
 		public Text wicketKeeperCountText;
 		public Text subsLeftText;
 		public Text budgetText;
-		public PlayerInfo selectedPlayer;
+		public PlayerInfo selectedPlayer ;
 
 		
 		public override void Initialize(MainCanvasHandler parentMenu) {
@@ -26,7 +26,9 @@ namespace FantasyApp {
 
 		public override void OnShow() {
 			base.OnShow();
-			selectedPlayer.playerName = "dummy";
+			if (selectedPlayer != null) {
+				selectedPlayer.playerName = "dummy";
+			}
 			DestroyAllButtons(scrollContent.transform);
 			CalculateSubs();
 			
@@ -72,16 +74,19 @@ namespace FantasyApp {
 		}
 		private void CalculateSubs() {
 			int noChanges = 0;
-			foreach(var playerPID in FirebaseTools.serverTeam) {
-				foreach(var player in parentMenu.currentTeam) {
-					if(playerPID == player.pid) {
-						noChanges++;
+			if (FirebaseTools.serverTeam != null) {
+				foreach (var playerPID in FirebaseTools.serverTeam) {
+					foreach (var player in parentMenu.currentTeam) {
+						if (playerPID == player.pid) {
+							noChanges++;
+						}
 					}
 				}
+
+				int changes = FirebaseTools.subsLeft - (11 - noChanges);
+
+				subsLeftText.text = "Subs left : " + changes;
 			}
-			int changes = FirebaseTools.subsLeft - (11 - noChanges);
-			
-			subsLeftText.text = "Subs left : " + changes;
 		}
 		public void ClearButtonClick() {
 			parentMenu.ClearAllPlayersFromCurrentTeam();
