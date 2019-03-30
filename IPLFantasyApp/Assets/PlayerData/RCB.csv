@@ -1,12 +1,25 @@
-PlayerName,Price,PlayerType
-Parthiv Patel,80k,WK
-Marcus Stoinis,90k,ALL
-Virat Kohli,110k,BAT
-AB De Villiers,110k,BAT
-Shimron Hetmyer,95k,ALL
-Collin De Grandhomme,85k,ALL
-Shivam Dube,80k,ALL
-Washington Sundar,80k ,ALL
-Yuzvendra Chahal,95k,BWL
-Umesh Yadav,95k,BWL
-Navdeep Saini,80k,BWL
+pid,name,Price,Type
+253802,Virat Kohli,110k,BAT
+500360,Akshdeep Nath,70k,BAT
+8917,Moeen Ali,85k,ALL
+430246,Yuzvendra Chahal,90k,BWL
+261354,Nathan Coulter-Nile,95k,BWL
+55395,Colin de Grandhomme,90k,ALL
+44936,AB de Villiers,105k,BAT
+714451,Shivam Dubey,90k,ALL
+537124,Gurkeerat Singh Mann,70k,ALL
+670025,Shimron Hetmyer,95k,ALL
+805235,Himmat Singh,65k,BAT
+1083033,Kulwant Khejroliya,70k,BWL
+436757,Heinrich Klaasen,85k,WK
+451947,Milind Kumar,65k,BAT
+940973,Mohammed Siraj,75k,BWL
+530773,Pawan Negi,80k,ALL
+1119026,Devdutt Padikkal,65k,BAT
+32242,Parthiv Patel,80k,WK
+1159712,Prayas Ray Barman,70k,BWL
+700167,Navdeep Saini,80k,BWL
+232364,Tim Southee,90k,BWL
+325012,Marcus Stoinis,95k,ALL
+719715,Washington Sundar,80k,ALL
+376116,Umesh Yadav,90k,BWL

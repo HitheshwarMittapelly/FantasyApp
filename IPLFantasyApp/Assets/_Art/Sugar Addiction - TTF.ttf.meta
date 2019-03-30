@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: b60e08c2898deeb4796c815b4cb3f497
+timeCreated: 1553227677
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Sugar Addiction
+  fontNames:
+  - Sugar Addiction
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
