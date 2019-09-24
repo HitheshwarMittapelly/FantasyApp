@@ -1,0 +1,698 @@
+{
+  "dateTimeGMT": "2019-03-19T16:00:00.000Z",
+  "data": {
+    "fielding": [
+      {
+        "title": "Fielding for Sri Lanka Innings",
+        "scores": [
+          {
+            "name": "F du Plessis",
+            "runout": 0,
+            "stumped": 0,
+            "bowled": 0,
+            "lbw": 0,
+            "catch": 1,
+            "pid": "44828"
+          },
+          {
+            "name": "RR Hendricks",
+            "runout": 0,
+            "stumped": 0,
+            "bowled": 0,
+            "lbw": 0,
+            "catch": 1,
+            "pid": "269280"
+          },
+          {
+            "name": "DA Miller",
+            "runout": 0,
+            "stumped": 1,
+            "bowled": 0,
+            "lbw": 0,
+            "catch": 1,
+            "pid": "321777"
+          },
+          {
+            "name": "AL Phehlukwayo",
+            "runout": 0,
+            "stumped": 0,
+            "bowled": 2,
+            "lbw": 0,
+            "catch": 0,
+            "pid": "540316"
+          },
+          {
+            "name": "L Sipamla",
+            "runout": 0,
+            "stumped": 0,
+            "bowled": 0,
+            "lbw": 0,
+            "catch": 1,
+            "pid": "698143"
+          }
+        ]
+      },
+      {
+        "title": "Fielding for South Africa Innings",
+        "scores": [
+          {
+            "name": "SL Malinga",
+            "runout": 0,
+            "stumped": 0,
+            "bowled": 1,
+            "lbw": 0,
+            "catch": 0,
+            "pid": "49758"
+          },
+          {
+            "name": "I Udana",
+            "runout": 0,
+            "stumped": 0,
+            "bowled": 0,
+            "lbw": 0,
+            "catch": 2,
+            "pid": "328026"
+          },
+          {
+            "name": "N Dickwella",
+            "runout": 3,
+            "stumped": 0,
+            "bowled": 0,
+            "lbw": 0,
+            "catch": 1,
+            "pid": "429754"
+          },
+          {
+            "name": "DM de Silva",
+            "runout": 0,
+            "stumped": 0,
+            "bowled": 0,
+            "lbw": 0,
+            "catch": 1,
+            "pid": "465793"
+          },
+          {
+            "name": "A Dananjaya",
+            "runout": 2,
+            "stumped": 0,
+            "bowled": 0,
+            "lbw": 0,
+            "catch": 0,
+            "pid": "574178"
+          },
+          {
+            "name": "BKG Mendis",
+            "runout": 1,
+            "stumped": 0,
+            "bowled": 0,
+            "lbw": 0,
+            "catch": 0,
+            "pid": "629074"
+          }
+        ]
+      }
+    ],
+    "bowling": [
+      {
+        "scores": [
+          {
+            "6s": 1,
+            "4s": 2,
+            "0s": 13,
+            "Econ": "6.25",
+            "W": "1",
+            "R": "25",
+            "M": "1",
+            "O": "4",
+            "bowler": "DW Steyn",
+            "pid": "47492"
+          },
+          {
+            "6s": 3,
+            "4s": 1,
+            "0s": 10,
+            "Econ": "10.50",
+            "W": "1",
+            "R": "42",
+            "M": "0",
+            "O": "4",
+            "bowler": "K Rabada",
+            "pid": "550215"
+          },
+          {
+            "6s": 0,
+            "4s": 1,
+            "0s": 8,
+            "Econ": "4.75",
+            "W": "1",
+            "R": "19",
+            "M": "0",
+            "O": "4",
+            "bowler": "L Sipamla",
+            "pid": "698143"
+          },
+          {
+            "6s": 0,
+            "4s": 1,
+            "0s": 8,
+            "Econ": "5.25",
+            "W": "1",
+            "R": "21",
+            "M": "0",
+            "O": "4",
+            "bowler": "Imran Tahir",
+            "pid": "40618"
+          },
+          {
+            "6s": 1,
+            "4s": 2,
+            "0s": 11,
+            "Econ": "6.25",
+            "W": "3",
+            "R": "25",
+            "M": "0",
+            "O": "4",
+            "bowler": "AL Phehlukwayo",
+            "pid": "540316"
+          }
+        ],
+        "title": "Bowling To Sri Lanka Innings"
+      },
+      {
+        "scores": [
+          {
+            "6s": 0,
+            "4s": 1,
+            "0s": 16,
+            "Econ": "2.75",
+            "W": "2",
+            "R": "11",
+            "M": "0",
+            "O": "4",
+            "bowler": "SL Malinga",
+            "pid": "49758"
+          },
+          {
+            "6s": 0,
+            "4s": 5,
+            "0s": 12,
+            "Econ": "7.00",
+            "W": "1",
+            "R": "28",
+            "M": "0",
+            "O": "4",
+            "bowler": "DM de Silva",
+            "pid": "465793"
+          },
+          {
+            "6s": 1,
+            "4s": 2,
+            "0s": 8,
+            "Econ": "7.00",
+            "W": "1",
+            "R": "28",
+            "M": "0",
+            "O": "4",
+            "bowler": "A Dananjaya",
+            "pid": "574178"
+          },
+          {
+            "6s": 0,
+            "4s": 2,
+            "0s": 6,
+            "Econ": "6.25",
+            "W": "1",
+            "R": "25",
+            "M": "0",
+            "O": "4",
+            "bowler": "JDF Vandersay",
+            "pid": "370040"
+          },
+          {
+            "6s": 1,
+            "4s": 0,
+            "0s": 2,
+            "Econ": "9.00",
+            "W": "0",
+            "R": "9",
+            "M": "0",
+            "O": "1",
+            "bowler": "PHKD Mendis",
+            "pid": "784373"
+          },
+          {
+            "6s": 1,
+            "4s": 3,
+            "0s": 3,
+            "Econ": "10.66",
+            "W": "0",
+            "R": "32",
+            "M": "0",
+            "O": "3",
+            "bowler": "I Udana",
+            "pid": "328026"
+          }
+        ],
+        "title": "Bowling To South Africa Innings"
+      }
+    ],
+    "batting": [
+      {
+        "scores": [
+          {
+            "dismissal-by": {
+              "name": "DA Miller",
+              "pid": "321777"
+            },
+            "dismissal": "catch",
+            "SR": 0,
+            "6s": 0,
+            "4s": 0,
+            "B": 2,
+            "R": 0,
+            "dismissal-info": "c  Miller b Steyn",
+            "batsman": "N Dickwella  ",
+            "pid": "429754"
+          },
+          {
+            "dismissal-by": {
+              "name": "RR Hendricks",
+              "pid": "269280"
+            },
+            "dismissal": "catch",
+            "SR": 106,
+            "6s": 2,
+            "4s": 0,
+            "B": 15,
+            "R": 16,
+            "dismissal-info": "c Hendricks b Sipamla",
+            "batsman": "WIA Fernando",
+            "pid": "784369"
+          },
+          {
+            "dismissal-by": {
+              "name": "L Sipamla",
+              "pid": "698143"
+            },
+            "dismissal": "catch",
+            "SR": 0,
+            "6s": 0,
+            "4s": 0,
+            "B": 6,
+            "R": 0,
+            "dismissal-info": "c Sipamla b Rabada",
+            "batsman": "BKG Mendis",
+            "pid": "629074"
+          },
+          {
+            "dismissal-by": {
+              "name": "DA Miller",
+              "pid": "321777"
+            },
+            "dismissal": "stumped",
+            "SR": 141,
+            "6s": 2,
+            "4s": 3,
+            "B": 29,
+            "R": 41,
+            "dismissal-info": "st  Miller b Imran Tahir",
+            "batsman": "PHKD Mendis",
+            "pid": "784373"
+          },
+          {
+            "dismissal-by": {
+              "name": "AL Phehlukwayo",
+              "pid": "540316"
+            },
+            "dismissal": "bowled",
+            "SR": 88,
+            "6s": 0,
+            "4s": 1,
+            "B": 18,
+            "R": 16,
+            "dismissal-info": " b Phehlukwayo",
+            "batsman": "AK Perera",
+            "pid": "300629"
+          },
+          {
+            "dismissal-by": {
+              "name": "F du Plessis",
+              "pid": "44828"
+            },
+            "dismissal": "catch",
+            "SR": 90,
+            "6s": 1,
+            "4s": 0,
+            "B": 21,
+            "R": 19,
+            "dismissal-info": "c du Plessis b Phehlukwayo",
+            "batsman": "NLTC Perera",
+            "pid": "233514"
+          },
+          {
+            "dismissal-by": {
+              "name": "AL Phehlukwayo",
+              "pid": "540316"
+            },
+            "dismissal": "bowled",
+            "SR": 73,
+            "6s": 0,
+            "4s": 0,
+            "B": 19,
+            "R": 14,
+            "dismissal-info": " b Phehlukwayo",
+            "batsman": "DM de Silva",
+            "pid": "465793"
+          },
+          {
+            "dismissal": "not out",
+            "SR": 200,
+            "6s": 0,
+            "4s": 1,
+            "B": 6,
+            "R": 12,
+            "dismissal-info": "not out",
+            "batsman": "I Udana",
+            "pid": "328026"
+          },
+          {
+            "dismissal": "not out",
+            "SR": 200,
+            "6s": 0,
+            "4s": 2,
+            "B": 4,
+            "R": 8,
+            "dismissal-info": "not out",
+            "batsman": "A Dananjaya",
+            "pid": "574178"
+          },
+          {
+            "SR": "",
+            "6s": "",
+            "4s": "",
+            "B": "",
+            "R": "",
+            "dismissal-info": "",
+            "detail": "8 (lb 2, w 6)",
+            "batsman": "Extras",
+            "pid": 0
+          }
+        ],
+        "title": "Sri Lanka Innings"
+      },
+      {
+        "scores": [
+          {
+            "dismissal-by": {
+              "name": "N Dickwella",
+              "pid": "429754"
+            },
+            "dismissal": "catch",
+            "SR": 76,
+            "6s": 0,
+            "4s": 2,
+            "B": 17,
+            "R": 13,
+            "dismissal-info": "c Dickwella b Dananjaya",
+            "batsman": "Q de Kock",
+            "pid": "379143"
+          },
+          {
+            "dismissal-by": [
+              {
+                "name": "A Dananjaya",
+                "pid": "574178"
+              },
+              {
+                "name": "N Dickwella",
+                "pid": "429754"
+              }
+            ],
+            "dismissal": "runout",
+            "SR": 100,
+            "6s": 0,
+            "4s": 1,
+            "B": 8,
+            "R": 8,
+            "dismissal-info": "run out (Dananjaya/ Dickwella)",
+            "batsman": "RR Hendricks",
+            "pid": "269280"
+          },
+          {
+            "dismissal-by": {
+              "name": "DM de Silva",
+              "pid": "465793"
+            },
+            "dismissal": "catch",
+            "SR": 91,
+            "6s": 1,
+            "4s": 2,
+            "B": 23,
+            "R": 21,
+            "dismissal-info": "c de Silva b Vandersay",
+            "batsman": "F du Plessis (c)",
+            "pid": "44828"
+          },
+          {
+            "dismissal-by": {
+              "name": "I Udana",
+              "pid": "328026"
+            },
+            "dismissal": "catch",
+            "SR": 113,
+            "6s": 1,
+            "4s": 1,
+            "B": 30,
+            "R": 34,
+            "dismissal-info": "c Udana b Malinga",
+            "batsman": "HE van der Dussen",
+            "pid": "337790"
+          },
+          {
+            "dismissal-by": [
+              {
+                "name": "BKG Mendis",
+                "pid": "629074"
+              },
+              {
+                "name": "N Dickwella",
+                "pid": "429754"
+              }
+            ],
+            "dismissal": "runout",
+            "SR": 178,
+            "6s": 1,
+            "4s": 5,
+            "B": 23,
+            "R": 41,
+            "dismissal-info": "run out ( Mendis/ Dickwella)",
+            "batsman": "DA Miller  ",
+            "pid": "321777"
+          },
+          {
+            "dismissal-by": [
+              {
+                "name": "A Dananjaya",
+                "pid": "574178"
+              },
+              {
+                "name": "N Dickwella",
+                "pid": "429754"
+              }
+            ],
+            "dismissal": "runout",
+            "SR": 128,
+            "6s": 0,
+            "4s": 1,
+            "B": 7,
+            "R": 9,
+            "dismissal-info": "run out (Dananjaya/ Dickwella)",
+            "batsman": "JP Duminy",
+            "pid": "44932"
+          },
+          {
+            "dismissal-by": {
+              "name": "I Udana",
+              "pid": "328026"
+            },
+            "dismissal": "catch",
+            "SR": 100,
+            "6s": 0,
+            "4s": 1,
+            "B": 4,
+            "R": 4,
+            "dismissal-info": "c Udana b de Silva",
+            "batsman": "AL Phehlukwayo",
+            "pid": "540316"
+          },
+          {
+            "dismissal-by": {
+              "name": "SL Malinga",
+              "pid": "49758"
+            },
+            "dismissal": "bowled",
+            "SR": 0,
+            "6s": 0,
+            "4s": 0,
+            "B": 4,
+            "R": 0,
+            "dismissal-info": " b Malinga",
+            "batsman": "K Rabada",
+            "pid": "550215"
+          },
+          {
+            "dismissal": "not out",
+            "SR": 33,
+            "6s": 0,
+            "4s": 0,
+            "B": 3,
+            "R": 1,
+            "dismissal-info": "not out",
+            "batsman": "DW Steyn",
+            "pid": "47492"
+          },
+          {
+            "dismissal": "not out",
+            "SR": 100,
+            "6s": 0,
+            "4s": 0,
+            "B": 1,
+            "R": 1,
+            "dismissal-info": "not out",
+            "batsman": "Imran Tahir",
+            "pid": "40618"
+          },
+          {
+            "SR": "",
+            "6s": "",
+            "4s": "",
+            "B": "",
+            "R": "",
+            "dismissal-info": "",
+            "detail": "2 (lb 1, w 1)",
+            "batsman": "Extras",
+            "pid": 0
+          }
+        ],
+        "title": "South Africa Innings"
+      }
+    ],
+    "team": [
+      {
+        "players": [
+          {
+            "name": "Q de Kock",
+            "pid": "379143"
+          },
+          {
+            "name": "RR Hendricks",
+            "pid": "269280"
+          },
+          {
+            "name": "F du Plessis",
+            "pid": "44828"
+          },
+          {
+            "name": "HE van der Dussen",
+            "pid": "337790"
+          },
+          {
+            "name": "DA Miller",
+            "pid": "321777"
+          },
+          {
+            "name": "JP Duminy",
+            "pid": "44932"
+          },
+          {
+            "name": "AL Phehlukwayo",
+            "pid": "540316"
+          },
+          {
+            "name": "K Rabada",
+            "pid": "550215"
+          },
+          {
+            "name": "DW Steyn",
+            "pid": "47492"
+          },
+          {
+            "name": "Imran Tahir",
+            "pid": "40618"
+          },
+          {
+            "name": "L Sipamla",
+            "pid": "698143"
+          }
+        ],
+        "name": "South Africa"
+      },
+      {
+        "players": [
+          {
+            "name": "N Dickwella",
+            "pid": "429754"
+          },
+          {
+            "name": "WIA Fernando",
+            "pid": "784369"
+          },
+          {
+            "name": "BKG Mendis",
+            "pid": "629074"
+          },
+          {
+            "name": "PHKD Mendis",
+            "pid": "784373"
+          },
+          {
+            "name": "AK Perera",
+            "pid": "300629"
+          },
+          {
+            "name": "NLTC Perera",
+            "pid": "233514"
+          },
+          {
+            "name": "DM de Silva",
+            "pid": "465793"
+          },
+          {
+            "name": "I Udana",
+            "pid": "328026"
+          },
+          {
+            "name": "A Dananjaya",
+            "pid": "574178"
+          },
+          {
+            "name": "SL Malinga",
+            "pid": "49758"
+          },
+          {
+            "name": "JDF Vandersay",
+            "pid": "370040"
+          }
+        ],
+        "name": "Sri Lanka"
+      }
+    ],
+    "man-of-the-match": {
+      "name": "DA Miller",
+      "pid": "321777"
+    },
+    "toss_winner_team": "South Africa",
+    "winner_team": "South Africa",
+    "matchStarted": true
+  },
+  "type": "T20I",
+  "cache3": true,
+  "creditsLeft": 206,
+  "v": "1",
+  "ttl": 18,
+  "provider": {
+    "source": "Various",
+    "url": "https://cricapi.com/",
+    "pubDate": "2019-03-20T07:28:48.841Z"
+  }
+}
