@@ -1,14 +1,163 @@
 var fs = require('fs');
-const doStuff = ()=> {
-    let playerInfo = []
+const GetAllPlayersStats = (whatever)=>{
+    let allPlayersStats = []
     var hasTeamOneBatFirst = false;
     fs.readFile('data.json', 'utf8', function(err, contents) {
     const data = JSON.parse(contents);
+  
+   
+    teamOne = data.data.team[0].players;
+    let teamOnePlayersStats = CalculatePlayersStatsOfATeam(teamOne,data,false);
+    teamTwo = data.data.team[1].players;
+    let teamTwoPlayersStats = CalculatePlayersStatsOfATeam(teamTwo,data,true)
+    allPlayersStats = teamOnePlayersStats.concat(teamTwoPlayersStats);
+
+    // for(var player of teamOne){
+    //     let currentPid = player.pid;
+    //     const output = {
+    //         pid : currentPid,
+    //         name : player.name
+    //     }
+    //     if(currentPid == starPlayer1PID || currentPid == starPlayer2PID){
+    //         output.starPlayer = 1;
+    //     }
+    //     else{
+    //         output.starPlayer = 0;
+    //     }
+    //     if(manOftheMatchPID == currentPid){
+    //         output.mom = 1;
+    //     }else{
+    //         output.mom = 0;
+    //     }
+    //     let teamOneBatting;
+    //     if(hasTeamOneBatFirst){
+    //         teamOneBatting = data.data.batting[0].scores;
+    //     }
+    //     else{
+    //         teamOneBatting = data.data.batting[1].scores;
+    //     }
+
+    //     for(var batter of teamOneBatting){
+    //         if(batter.pid == currentPid){
+    //             output.runs = batter.R;
+    //             output.fours = batter['4s'];
+    //             output.sixes = batter['6s'];
+    //             output.StrikeRate = batter.SR;
+    //         }
+    //     }
+    //     let teamOneBowling;
+    //     if(hasTeamOneBatFirst){
+    //         teamOneBowling = data.data.bowling[1].scores;
+    //     }
+    //     else{
+    //         teamOneBowling = data.data.bowling[0].scores;
+    //     }
+    //     for(var bowler of teamOneBowling){
+    //         if(bowler.pid == currentPid){
+    //             output.economy = bowler.Econ;
+    //             output.wickets = bowler.W;
+    //             output.maidens = bowler.M;
+    //         }
+    //     }
+    //     let teamOneFielding;
+    //     if(hasTeamOneBatFirst){
+    //         teamOneFielding = data.data.fielding[1].scores;
+    //     }
+    //     else{
+    //         teamOneFielding = data.data.fielding[0].scores;
+    //     }
+    //     for(var fielder of teamOneFielding){
+    //         if(fielder.pid == currentPid){
+    //             output.catches = fielder.catch;
+    //             output.runouts = fielder.runout;
+    //             output.stumped = fielder.stumped;
+    //         }
+    //     }
+    //     var playerPoints = CalculateScores(output);
+    //     output.points = playerPoints;
+    //     playerInfo.push(output);
+    // }
+    output = undefined;
+   
+    // for(var player of teamTwo){
+    //     let currentPid = player.pid;
+    //     const output = {
+    //         pid : currentPid,
+    //         name : player.name
+    //     }
+    //     if(currentPid == starPlayer1PID || currentPid == starPlayer2PID){
+    //         output.starPlayer = 1;
+    //     }
+    //     else{
+    //         output.starPlayer = 0;
+    //     }
+    //     if(manOftheMatchPID == currentPid){
+    //         output.mom = 1;
+    //     }else{
+    //         output.mom = 0;
+    //     }
+    //     let teamTwoBatting;
+    //     if(hasTeamOneBatFirst){
+    //         teamTwoBatting = data.data.batting[1].scores;
+    //     }
+    //     else{
+    //         teamTwoBatting = data.data.batting[0].scores;
+    //     }
+
+    //     for(var batter of teamTwoBatting){
+    //         if(batter.pid == currentPid){
+    //             output.runs = batter.R;
+    //             output.fours = batter['4s'];
+    //             output.sixes = batter['6s'];
+    //             output.StrikeRate = batter.SR;
+    //         }
+    //     }
+    //     let teamTwoBowling;
+    //     if(hasTeamOneBatFirst){
+    //         teamTwoBowling = data.data.bowling[0].scores;
+    //     }
+    //     else{
+    //         teamTwoBowling = data.data.bowling[1].scores;
+    //     }
+    //     for(var bowler of teamTwoBowling){
+    //         if(bowler.pid == currentPid){
+    //             output.economy = bowler.Econ;
+    //             output.wickets = bowler.W;
+    //             output.maidens = bowler.M;
+    //         }
+    //     }
+    //     let teamTwoFielding;
+    //     if(hasTeamOneBatFirst){
+    //         teamTwoFielding = data.data.fielding[0].scores;
+    //     }
+    //     else{
+    //         teamTwoFielding = data.data.fielding[1].scores;
+    //     }
+    //     for(var fielder of teamTwoFielding){
+    //         if(fielder.pid == currentPid){
+    //             output.catches = fielder.catch;
+    //             output.runouts = fielder.runout;
+    //             output.stumped = fielder.stumped;
+    //         }
+    //     }
+    //     let playerPoints = CalculateScores(output);
+    //     output.points = playerPoints;
+        
+    //     allPlayersStats.push(output);
+    // }
+    
+    });
+    console.log(allPlayersStats);
+    return allPlayersStats;
+    
+}
+
+const CalculatePlayersStatsOfATeam = (playersOfTeam,data,hasTeamBatFirst)=>{
     let starPlayer1PID = "321777";
     let starPlayer2PID = "49758";
     let manOftheMatchPID = data.data['man-of-the-match'].pid;
-    teamOne = data.data.team[0].players;
-    for(var player of teamOne){
+    let playerInfo = []
+    for(var player of playersOfTeam){
         let currentPid = player.pid;
         const output = {
             pid : currentPid,
@@ -26,7 +175,7 @@ const doStuff = ()=> {
             output.mom = 0;
         }
         let teamOneBatting;
-        if(hasTeamOneBatFirst){
+        if(hasTeamBatFirst){
             teamOneBatting = data.data.batting[0].scores;
         }
         else{
@@ -42,7 +191,7 @@ const doStuff = ()=> {
             }
         }
         let teamOneBowling;
-        if(hasTeamOneBatFirst){
+        if(hasTeamBatFirst){
             teamOneBowling = data.data.bowling[1].scores;
         }
         else{
@@ -56,7 +205,7 @@ const doStuff = ()=> {
             }
         }
         let teamOneFielding;
-        if(hasTeamOneBatFirst){
+        if(hasTeamBatFirst){
             teamOneFielding = data.data.fielding[1].scores;
         }
         else{
@@ -73,82 +222,7 @@ const doStuff = ()=> {
         output.points = playerPoints;
         playerInfo.push(output);
     }
-    output = undefined;
-    teamTwo = data.data.team[1].players;
-    for(var player of teamTwo){
-        let currentPid = player.pid;
-        const output = {
-            pid : currentPid,
-            name : player.name
-        }
-        if(currentPid == starPlayer1PID || currentPid == starPlayer2PID){
-            output.starPlayer = 1;
-        }
-        else{
-            output.starPlayer = 0;
-        }
-        if(manOftheMatchPID == currentPid){
-            output.mom = 1;
-        }else{
-            output.mom = 0;
-        }
-        let teamTwoBatting;
-        if(hasTeamOneBatFirst){
-            teamTwoBatting = data.data.batting[1].scores;
-        }
-        else{
-            teamTwoBatting = data.data.batting[0].scores;
-        }
-
-        for(var batter of teamTwoBatting){
-            if(batter.pid == currentPid){
-                output.runs = batter.R;
-                output.fours = batter['4s'];
-                output.sixes = batter['6s'];
-                output.StrikeRate = batter.SR;
-            }
-        }
-        let teamTwoBowling;
-        if(hasTeamOneBatFirst){
-            teamTwoBowling = data.data.bowling[0].scores;
-        }
-        else{
-            teamTwoBowling = data.data.bowling[1].scores;
-        }
-        for(var bowler of teamTwoBowling){
-            if(bowler.pid == currentPid){
-                output.economy = bowler.Econ;
-                output.wickets = bowler.W;
-                output.maidens = bowler.M;
-            }
-        }
-        let teamTwoFielding;
-        if(hasTeamOneBatFirst){
-            teamTwoFielding = data.data.fielding[0].scores;
-        }
-        else{
-            teamTwoFielding = data.data.fielding[1].scores;
-        }
-        for(var fielder of teamTwoFielding){
-            if(fielder.pid == currentPid){
-                output.catches = fielder.catch;
-                output.runouts = fielder.runout;
-                output.stumped = fielder.stumped;
-            }
-        }
-        let playerPoints = CalculateScores(output);
-        output.points = playerPoints;
-        
-        playerInfo.push(output);
-    }
-    
-    
-
-   
-    });
-    
     return playerInfo;
-    
 }
 const CalculateScores = (output)=>{
     let points = 0;
@@ -223,5 +297,5 @@ const CalculateScores = (output)=>{
     
     return points;
 }
-doStuff();
-module.exports = doStuff;
+GetAllPlayersStats();
+module.exports = GetAllPlayersStats;
